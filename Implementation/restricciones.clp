@@ -1,13 +1,7 @@
-(deffunction intersect (?set ?sett) 
-   (bind ?r (create$)) 
-   (foreach ?e ?set 
-        (if (and (member$ ?e ?sett)  (member$ ?e ?r)) 
-             then (bind ?r (create$ ?r ?e)))) 
- (return ?r))
-
 (defrule h
-    (averia (tipo ?t))
-    (tecnico (especialidad ?t))
+    ?p <- (tecnico (name ?n)(especialidad $?i ?t $?d))
+	?f <- (averia (tipo ?t))
     =>
-    (printout t ?t crlf)
+    (modify ?f (tecnico ?n))
+	(retract ?p)
 )
