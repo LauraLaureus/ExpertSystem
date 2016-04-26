@@ -1,4 +1,5 @@
 (clear)
 (load "baseHechos.clp")
+(load "backtracking.clp")
 (load "restricciones.clp")
 (reset)
