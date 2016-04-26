@@ -132,6 +132,7 @@
     )
 )
 
+
 (deffacts personal
    	(tecnico
 		(name Pepe)
@@ -141,6 +142,6 @@
     (tecnico
 		(name Carmelo)
         (id 1)
-		(especialidad inmobiliaria fontaneria albanileria)
+		(especialidad fontaneria electricidad albanileria inmobiliaria)
 	)
 )
