@@ -142,6 +142,6 @@
     (tecnico
 		(name Carmelo)
         (id 1)
-		(especialidad fontaneria electricidad albanileria inmobiliaria)
+		(especialidad fontaneria electricidad )
 	)
 )

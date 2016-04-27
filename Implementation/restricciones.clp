@@ -19,7 +19,7 @@
 (assert (vuelta-atras)))
 
 
-;;;;R1
+;;;;R1 todas las reparaciones de un tecnico pertenecen a una de las especialidades del tecnico
 (defrule test-restriccion1
     (declare (salience 200))
     (fase avance)
@@ -43,4 +43,23 @@
 )
 
 
-;;;
+;;;R2 las prioridades están listadas de menor a mayor
+
+(defrule test-restriccion2
+    (declare (salience 200))
+    (fase avance)
+    (not (vuelta-atras))
+    (solucion $?inicio $?cab ?a  ?b $?desp $?final)
+    ?fffff <- (elementos (elemento ?a))
+    (test (=(+(+(+ (length$ ?inicio)(length$ ?final))(+ (length$ ?cab)(length$ ?desp)))2)16))
+    (test (= 0 (mod (length$ $?inicio) 8)))
+    (test (= 0 (mod (length$ $?final) 8)))
+;(test (= (+ (length$ $?cab) (length$ $?desp)) 6))
+    (averia (id ?a) (prioridad ?especialidad))
+    (averia (id ?b) (prioridad ?especialidad2))
+    (test (> ?especialidad ?especialidad2))
+=>
+    (modify ?fffff (eliminado 1))
+    (assert (vuelta-atras))
+
+)
