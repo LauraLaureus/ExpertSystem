@@ -51,7 +51,7 @@
     (not (vuelta-atras))
     (solucion $?inicio $?cab ?a  ?b $?desp $?final)
     ?fffff <- (elementos (elemento ?a))
-    (test (=(+(+(+ (length$ ?inicio)(length$ ?final))(+ (length$ ?cab)(length$ ?desp)))2)16))
+    ?ffff <- (elementos (elemento ?b))
     (test (= 0 (mod (length$ $?inicio) 8)))
     (test (= 0 (mod (length$ $?final) 8)))
 ;(test (= (+ (length$ $?cab) (length$ $?desp)) 6))
