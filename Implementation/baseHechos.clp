@@ -19,25 +19,25 @@
     (averia
         (name cambiar_bombillo)
         (tipo electricidad)
-        (prioridad 3)
+        (prioridad 1)
         (id  a)
     )
 	(averia
         (name arreglar_tajertero)
         (tipo electricidad)
-        (prioridad 1)
+        (prioridad 4)
         (id b)
     )
 	(averia
         (name arreglar_enchufes)
         (tipo electricidad)
-        (prioridad 3)
+        (prioridad 5)
         (id c)
     )
 	(averia
         (name arreglar_motores)
         (tipo electricidad)
-        (prioridad 1)
+        (prioridad 2)
         (id d)
     )
 	(averia
@@ -49,61 +49,61 @@
 	(averia
         (name arreglar_termo)
         (tipo fontaneria)
-        (prioridad 1)
+        (prioridad 3)
         (id f)
     )
 	(averia
         (name cambiar_tuberia)
         (tipo fontaneria)
-        (prioridad 3)
+        (prioridad 4)
         (id g)
     )
 	(averia
         (name arreglar_motor)
         (tipo fontaneria)
-        (prioridad 1)
+        (prioridad 2)
         (id h)
     )
 	(averia
         (name cambiar_plaqueta)
         (tipo albanileria)
-        (prioridad 2)
+        (prioridad 3)
         (id i)
     )
 	(averia
         (name levantar_muro)
         (tipo albanileria)
-        (prioridad 4)
+        (prioridad 1)
         (id j)
     )
 	(averia
         (name pintar)
         (tipo albanileria)
-        (prioridad 5)
+        (prioridad 2)
         (id k)
     )
 	(averia
         (name arreglar_techo)
         (tipo albanileria)
-        (prioridad 3)
+        (prioridad 1)
         (id l)
     )
 	(averia
         (name lijar_puerta)
         (tipo inmobiliaria)
-        (prioridad 3)
+        (prioridad 2)
         (id m)
     )
 	(averia
         (name cambiar_electrodomesticos)
         (tipo inmobiliaria)
-        (prioridad 4)
+        (prioridad 2)
         (id n)
     )
 	(averia
         (name cambiar_banera)
         (tipo inmobiliaria)
-        (prioridad 2)
+        (prioridad 1)
         (id o)
     )
 	(averia
@@ -115,7 +115,7 @@
 	(averia
         (name limpiar_alrededores)
         (tipo jardineria)
-        (prioridad 3)
+        (prioridad 1)
         (id q)
     )
 	(averia
@@ -142,6 +142,6 @@
     (tecnico
 		(name Carmelo)
         (id 1)
-		(especialidad fontaneria electricidad )
+		(especialidad fontaneria electricidad)
 	)
 )

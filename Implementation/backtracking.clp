@@ -28,6 +28,7 @@
 
 ; contador de soluciones encontradas
 (defglobal ?*nsol* = 0)
+(defglobal ?*imprimirSolucion* = 0)
 
 (deftemplate elementos
 (slot posicion
@@ -104,13 +105,33 @@
 (elemento ?b)
 (posicion ?pos&:(= ?pos (+ 1 (length$ ?a))))
 )
+(solucion ?s1 ?s2 ?s3 ?s4 ?s5 ?s6 ?s7 ?s8 ?s9 ?s10 ?s11 ?s12 ?s13 ?s14 ?s15 ?s16)
+(averia (name ?name1) (id ?s1)(prioridad ?p1))
+(averia (name ?name2) (id ?s2)(prioridad ?p2))
+(averia (name ?name3) (id ?s3)(prioridad ?p3))
+(averia (name ?name4) (id ?s4)(prioridad ?p4))
+(averia (name ?name5) (id ?s5)(prioridad ?p5))
+(averia (name ?name6) (id ?s6)(prioridad ?p6))
+(averia (name ?name7) (id ?s7)(prioridad ?p7))
+(averia (name ?name8) (id ?s8)(prioridad ?p8))
+(averia (name ?name9) (id ?s9)(prioridad ?p9))
+(averia (name ?name10) (id ?s10)(prioridad ?p10))
+(averia (name ?name11) (id ?s11)(prioridad ?p11))
+(averia (name ?name12) (id ?s12)(prioridad ?p12))
+(averia (name ?name13) (id ?s13)(prioridad ?p13))
+(averia (name ?name14) (id ?s14)(prioridad ?p14))
+(averia (name ?name15) (id ?s15)(prioridad ?p15))
+(averia (name ?name16) (id ?s16)(prioridad ?p16))
 =>
 (bind ?*nsol* (+ 1 ?*nsol*))
-(printout t "Solucion " ?*nsol* " -> " (create$ $?a ?b) crlf)
+(bind ?tPrioridad (+ ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ?p11 ?p12 ?p13 ?p14 ?p15 ?p16))
+(printout t "Solucion " ?*nsol* (create$ $?a ?b) crlf crlf)
+;(printout t "Trabajador llamado Pepe arregla las siguientes averias: " ?name1 " " ?name2 " " ?name3 " " ?name4 " " ?name5 " " ?name6 " " ?name7 " " ?name8 crlf crlf)
+;(printout t "Trabajador llamado Carmelo arregla las siguientes averias: " ?name9 " " ?name10 " " ?name11 " " ?name12 " " ?name13 " " ?name14 " " ?name15 " " ?name16 crlf crlf)
 (modify ?h (eliminado 1))
 (assert (solucion $?a))
+(assert (ConjuntoDeSoluciones $?a ?b ?tPrioridad))
 (retract ?f))
-
 ;La aplicación acaba cuando se detecta que tenemos el dominio 1 saturado
 (defrule fin
 (declare (salience 3000))
@@ -147,3 +168,16 @@
 (eliminado 1))
 =>
 (modify ?f (eliminado 0)))
+
+(defrule numeroMaximosDeSoluciones
+(declare (salience 101))
+?fa <- (fase avance)
+?f <- (elementos
+	  (elemento ?ele)) 
+(test (= ?*nsol* 10 ))
+=>
+ (modify ?f (eliminado 1))
+ (assert (fase-prioridad))
+ (retract ?fa)
+)
+
