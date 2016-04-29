@@ -43,41 +43,52 @@
 )
 
 
-;;;R2 las prioridades están listadas de menor a mayor
-
-;(defrule test-restriccion2
-    ;(declare (salience 200))
-    ;(fase avance)
-    ;(not (vuelta-atras))
-    ;(solucion $?inicio $?cab ?a  ?b $?desp $?final)
-    ;?fffff <- (elementos (elemento ?a))
-    ;?ffff <- (elementos (elemento ?b))
-    ;(test (= 0 (mod (length$ $?inicio) 8)))
-    ;(test (= 0 (mod (length$ $?final) 8)))
-;(test (= (+ (length$ $?cab) (length$ $?desp)) 6))
-    ;(averia (id ?a) (prioridad ?especialidad))
-    ;(averia (id ?b) (prioridad ?especialidad2))
-    ;(test (> ?especialidad ?especialidad2))
-;=>
-    ;(modify ?fffff (eliminado 1))
-    ;(assert (vuelta-atras))
-
-;)
 (defrule obtenerMejorSolucion
-(declare (salience 3002))
-(fase-prioridad)
-(ConjuntoDeSoluciones $?inicio ?final)
-?f <-(ConjuntoDeSoluciones $?inicio2 ?final2)
-(test (> ?final2 ?final))
-=>
-(retract ?f)
+;    (declare (salience 3002))
+    (fase-prioridad)
+    (ConjuntoDeSoluciones $?inicio ?final)
+    ?f <-(ConjuntoDeSoluciones $?inicio2 ?final2)
+    (test (> ?final2 ?final))
+    =>
+    (retract ?f)
 )
+
+(defrule cambiaFase
+    (declare (salience -1))
+    ?q <-(fase-prioridad)
+    =>
+    (retract ?q)
+    (assert (fase-ordena))
+)
+
+(defrule bubleSort
+    (fase-ordena)
+    ?s <- (ConjuntoDeSoluciones $?i ?a ?b $?d ?final)
+    (averia (id ?a) (prioridad ?p1))
+    (averia (id ?b) (prioridad ?p2))
+    (test (> ?p1 ?p2))
+    =>
+(retract ?s)
+;(bind ?s (create$ ConjuntoDeSoluciones ?i ?b ?a ?d ?final))
+    (assert (ConjuntoDeSoluciones ?i ?b ?a ?d ?final))
+
+)
+
+
+
+(defrule cambiaFase2
+    (declare (salience -1))
+    ?q <-(fase-ordena)
+    =>
+    (retract ?q)
+    (assert (fase-imprimir))
+)
+
 (defrule imprimirMejorSolucion
-(declare (salience 3005))
-(fase-prioridad)
-(ConjuntoDeSoluciones $?inicio ?final)
-(test (= ?*imprimirSolucion* 0 ))
-=>
-(printout t ?inicio crlf)
-(bind ?*imprimirSolucion* (+ 1 ?*imprimirSolucion*))
+    (fase-imprimir)
+    (ConjuntoDeSoluciones $?inicio ?final)
+    (test (= ?*imprimirSolucion* 0 ))
+    =>
+    (printout t ?inicio crlf)
+    (bind ?*imprimirSolucion* (+ 1 ?*imprimirSolucion*))
 )
