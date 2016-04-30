@@ -130,7 +130,7 @@
 ;(printout t "Trabajador llamado Carmelo arregla las siguientes averias: " ?name9 " " ?name10 " " ?name11 " " ?name12 " " ?name13 " " ?name14 " " ?name15 " " ?name16 crlf crlf)
 (modify ?h (eliminado 1))
 (assert (solucion $?a))
-(assert (ConjuntoDeSoluciones $?a ?b ?tPrioridad))
+(assert (ConjuntoDeSoluciones (solucion $?a ?b ?tPrioridad)))
 (retract ?f))
 ;La aplicación acaba cuando se detecta que tenemos el dominio 1 saturado
 (defrule fin
@@ -174,7 +174,7 @@
 ?fa <- (fase avance)
 ?f <- (elementos
 	  (elemento ?ele)) 
-(test (= ?*nsol* 10 ))
+(test (= ?*nsol* 3))
 =>
  (modify ?f (eliminado 1))
  (assert (fase-prioridad))

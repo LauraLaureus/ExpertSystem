@@ -43,11 +43,11 @@
 )
 
 
-(defrule obtenerMejorSolucion
 ;    (declare (salience 3002))
+(defrule obtenerMejorSolucion
     (fase-prioridad)
-    (ConjuntoDeSoluciones $?inicio ?final)
-    ?f <-(ConjuntoDeSoluciones $?inicio2 ?final2)
+    (ConjuntoDeSoluciones (solucion $?inicio ?final))
+    ?f <-(ConjuntoDeSoluciones (solucion $?inicio2 ?final2))
     (test (> ?final2 ?final))
     =>
     (retract ?f)
@@ -63,14 +63,16 @@
 
 (defrule bubleSort
     (fase-ordena)
-    ?s <- (ConjuntoDeSoluciones $?i ?a ?b $?d ?final)
+    ?s <- (ConjuntoDeSoluciones (solucion $?i $?in ?a ?b $?fi $?f ?final))
     (averia (id ?a) (prioridad ?p1))
     (averia (id ?b) (prioridad ?p2))
+	(test(= (mod (length$ ?i) 8) 0))
+    (test(= (mod (length$ ?f) 8) 0))
+	(test(= (+ (length$ ?in) (length$ ?a) (length$ ?b) (length$ ?fi)) 8))
     (test (> ?p1 ?p2))
     =>
-(retract ?s)
-;(bind ?s (create$ ConjuntoDeSoluciones ?i ?b ?a ?d ?final))
-    (assert (ConjuntoDeSoluciones ?i ?b ?a ?d ?final))
+	(retract ?s)
+    (assert (ConjuntoDeSoluciones (solucion $?i $?in ?b ?a $?fi $?f ?final)))
 
 )
 
@@ -86,9 +88,9 @@
 
 (defrule imprimirMejorSolucion
     (fase-imprimir)
-    (ConjuntoDeSoluciones $?inicio ?final)
-    (test (= ?*imprimirSolucion* 0 ))
+    (ConjuntoDeSoluciones (solucion $?inicio ?final))
+    ;(test (<> ?*imprimirSolucion* 3 ))
     =>
     (printout t ?inicio crlf)
-    (bind ?*imprimirSolucion* (+ 1 ?*imprimirSolucion*))
+    ;(bind ?*imprimirSolucion* (+ 1 ?*imprimirSolucion*))
 )
